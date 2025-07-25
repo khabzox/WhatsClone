@@ -1,26 +1,185 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  
+  /* WhatsApp Custom Colors */
+  --color-whatsapp-green: var(--whatsapp-green);
+  --color-whatsapp-green-dark: var(--whatsapp-green-dark);
+  --color-whatsapp-green-light: var(--whatsapp-green-light);
+  --color-whatsapp-teal: var(--whatsapp-teal);
+  --color-message-bubble: var(--message-bubble);
+  --color-message-bubble-own: var(--message-bubble-own);
+  --color-chat-header: var(--chat-header);
+  --color-sidebar-dark: var(--sidebar-dark);
+  --color-online-green: var(--online-green);
+  --color-unread-badge: var(--unread-badge);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.5rem;
+  
+  /* Light Mode - WhatsApp Colors */
+  --background: #f0f2f5; /* WhatsApp light gray background */
+  --foreground: #111b21; /* Dark text */
+  --card: #ffffff; /* White cards */
+  --card-foreground: #111b21;
+  --popover: #ffffff;
+  --popover-foreground: #111b21;
+  --primary: #00a884; /* WhatsApp Green */
+  --primary-foreground: #ffffff;
+  --secondary: #f0f2f5; /* Light gray */
+  --secondary-foreground: #54656f;
+  --muted: #e9edef; /* Slightly darker gray */
+  --muted-foreground: #667781; /* Medium gray text */
+  --accent: #00a884; /* WhatsApp Green */
+  --accent-foreground: #ffffff;
+  --destructive: #e53e3e; /* Red for delete/error */
+  --border: #e9edef; /* Light border */
+  --input: #f0f2f5; /* Input background */
+  --ring: #00a884; /* Focus ring - WhatsApp Green */
+  
+  /* Chart colors (keeping originals) */
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  
+  /* Sidebar - Left panel colors */
+  --sidebar: #ffffff; /* White sidebar */
+  --sidebar-foreground: #111b21;
+  --sidebar-primary: #00a884; /* WhatsApp Green */
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f0f2f5; /* Light hover */
+  --sidebar-accent-foreground: #111b21;
+  --sidebar-border: #e9edef;
+  --sidebar-ring: #00a884;
+  
+  /* WhatsApp Specific Colors */
+  --whatsapp-green: #00a884; /* Main WhatsApp Green */
+  --whatsapp-green-dark: #008069; /* Darker green for hover */
+  --whatsapp-green-light: #d1f4cc; /* Light green for own messages */
+  --whatsapp-teal: #0da58e; /* WhatsApp teal variant */
+  --message-bubble: #ffffff; /* Received messages */
+  --message-bubble-own: #d1f4cc; /* Sent messages */
+  --chat-header: #f0f2f5; /* Chat header background */
+  --sidebar-dark: #202c33; /* Dark sidebar for contrast */
+  --online-green: #06d755; /* Online status indicator */
+  --unread-badge: #00a884; /* Unread message count */
+}
+
+.dark {
+  /* Dark Mode - WhatsApp Dark Theme */
+  --background: #0b141a; /* Dark background */
+  --foreground: #e9edef; /* Light text */
+  --card: #202c33; /* Dark cards */
+  --card-foreground: #e9edef;
+  --popover: #202c33;
+  --popover-foreground: #e9edef;
+  --primary: #00a884; /* WhatsApp Green (same in dark) */
+  --primary-foreground: #111b21;
+  --secondary: #2a3942; /* Darker gray */
+  --secondary-foreground: #aebac1;
+  --muted: #2a3942; /* Dark muted */
+  --muted-foreground: #8696a0; /* Muted text */
+  --accent: #00a884; /* WhatsApp Green */
+  --accent-foreground: #111b21;
+  --destructive: #ff6b6b; /* Lighter red for dark mode */
+  --border: #2a3942; /* Dark border */
+  --input: #2a3942; /* Dark input */
+  --ring: #00a884; /* Focus ring */
+  
+  /* Chart colors (darker variants) */
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  
+  /* Dark Sidebar */
+  --sidebar: #111b21; /* Dark sidebar */
+  --sidebar-foreground: #e9edef;
+  --sidebar-primary: #00a884;
+  --sidebar-primary-foreground: #111b21;
+  --sidebar-accent: #2a3942; /* Dark hover */
+  --sidebar-accent-foreground: #e9edef;
+  --sidebar-border: #2a3942;
+  --sidebar-ring: #00a884;
+  
+  /* WhatsApp Dark Specific Colors */
+  --whatsapp-green: #00a884;
+  --whatsapp-green-dark: #008069;
+  --whatsapp-green-light: #005c4b; /* Darker green for own messages in dark mode */
+  --whatsapp-teal: #0da58e;
+  --message-bubble: #202c33; /* Dark received messages */
+  --message-bubble-own: #005c4b; /* Dark sent messages */
+  --chat-header: #202c33; /* Dark chat header */
+  --sidebar-dark: #111b21;
+  --online-green: #06d755;
+  --unread-badge: #00a884;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Additional WhatsApp-specific utility classes */
+@layer utilities {
+  .bg-whatsapp-green { background-color: var(--whatsapp-green); }
+  .bg-whatsapp-green-dark { background-color: var(--whatsapp-green-dark); }
+  .bg-whatsapp-green-light { background-color: var(--whatsapp-green-light); }
+  .bg-message-bubble { background-color: var(--message-bubble); }
+  .bg-message-bubble-own { background-color: var(--message-bubble-own); }
+  .bg-chat-header { background-color: var(--chat-header); }
+  .bg-sidebar-dark { background-color: var(--sidebar-dark); }
+  
+  .text-whatsapp-green { color: var(--whatsapp-green); }
+  .text-online-green { color: var(--online-green); }
+  
+  .border-whatsapp-green { border-color: var(--whatsapp-green); }
 }
