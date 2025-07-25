@@ -18,7 +18,7 @@ export function AuthGuard({ children }: AuthGuardProps) {
       <div className="min-h-screen bg-wa-main flex items-center justify-center">
         <div className="flex items-center gap-2">
           <div className="w-6 h-6 border-2 border-whatsapp-green border-t-transparent rounded-full animate-spin"></div>
-          <div className="text-wa-primary">Loading WhatsApp...</div>
+          <div className="text-wa-primary">Loading...</div>
         </div>
       </div>
     )
