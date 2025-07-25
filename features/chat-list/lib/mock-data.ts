@@ -1,4 +1,4 @@
-import type { Chat } from "../types"
+import type { Chat } from "../types";
 
 export const mockChats: Chat[] = [
   {
@@ -91,4 +91,4 @@ export const mockChats: Chat[] = [
     isPinned: false,
     isArchived: true,
   },
-]
+];

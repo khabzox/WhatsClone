@@ -1,27 +1,27 @@
-'use client'
+"use client";
 
-import { useAuth } from '@clerk/nextjs'
-import { useState } from 'react'
-import { AuthModal } from './auth-modal'
+import { useAuth } from "@clerk/nextjs";
+import { useState } from "react";
+import { AuthModal } from "./auth-modal";
 
 interface AuthGuardProps {
-  readonly children: React.ReactNode
+  readonly children: React.ReactNode;
 }
 
 export function AuthGuard({ children }: AuthGuardProps) {
-  const { isSignedIn, isLoaded } = useAuth()
-  const [authMode, setAuthMode] = useState<'sign-in' | 'sign-up'>('sign-in')
+  const { isSignedIn, isLoaded } = useAuth();
+  const [authMode, setAuthMode] = useState<"sign-in" | "sign-up">("sign-in");
 
   // Show loading state while Clerk is initializing
   if (!isLoaded) {
     return (
-      <div className="min-h-screen bg-wa-main flex items-center justify-center">
+      <div className="bg-wa-main flex min-h-screen items-center justify-center">
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 border-2 border-whatsapp-green border-t-transparent rounded-full animate-spin"></div>
+          <div className="border-whatsapp-green h-6 w-6 animate-spin rounded-full border-2 border-t-transparent"></div>
           <div className="text-wa-primary">Loading...</div>
         </div>
       </div>
-    )
+    );
   }
 
   // If not signed in, show the modal over a blurred app preview
@@ -29,20 +29,14 @@ export function AuthGuard({ children }: AuthGuardProps) {
     return (
       <div className="relative">
         {/* Blurred app preview in background */}
-        <div className="blur-sm pointer-events-none">
-          {children}
-        </div>
-        
+        <div className="pointer-events-none blur-sm">{children}</div>
+
         {/* Auth modal overlay */}
-        <AuthModal
-          isOpen={true}
-          mode={authMode}
-          onModeChange={setAuthMode}
-        />
+        <AuthModal isOpen={true} mode={authMode} onModeChange={setAuthMode} />
       </div>
-    )
+    );
   }
 
   // User is authenticated, show the full app
-  return <>{children}</>
+  return <>{children}</>;
 }

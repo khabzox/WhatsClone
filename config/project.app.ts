@@ -1,5 +1,5 @@
 const configProject = {
-    appName: "WhatsClone",
-}
+  appName: "WhatsClone",
+};
 
 export default configProject;

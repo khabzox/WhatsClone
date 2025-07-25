@@ -1,27 +1,27 @@
-"use client"
+"use client";
 
-import { useEffect, useRef } from "react"
-import { MessageBubble } from "./message-bubble"
-import { mockMessages } from "../lib/mock-messages"
-import { TypingDots } from "@/features/typing-indicator/components/typing-dots"
-import { mockChats } from "@/features/chat-list/lib/mock-data"
+import { useEffect, useRef } from "react";
+import { MessageBubble } from "./message-bubble";
+import { mockMessages } from "../lib/mock-messages";
+import { TypingDots } from "@/features/typing-indicator/components/typing-dots";
+import { mockChats } from "@/features/chat-list/lib/mock-data";
 
 interface MessageAreaProps {
-  chatId: string
+  chatId: string;
 }
 
 export function MessageArea({ chatId }: MessageAreaProps) {
-  const messagesEndRef = useRef<HTMLDivElement>(null)
-  const messages = mockMessages[chatId] || []
-  const chat = mockChats.find((c) => c.id === chatId)
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messages = mockMessages[chatId] || [];
+  const chat = mockChats.find(c => c.id === chatId);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }, [messages])
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
     <div
-      className="flex-1 overflow-y-auto scrollbar-thin p-4 space-y-1 relative"
+      className="scrollbar-thin relative flex-1 space-y-1 overflow-y-auto p-4"
       style={{
         backgroundImage: `
           radial-gradient(circle at 25% 25%, rgba(0, 168, 132, 0.02) 0%, transparent 50%),
@@ -47,9 +47,9 @@ export function MessageArea({ chatId }: MessageAreaProps) {
 
         {/* Typing indicator */}
         {chat?.isTyping && (
-          <div className="flex justify-start mt-2">
-            <div className="bg-message-bubble text-wa-primary rounded-lg px-3 py-2 relative max-w-[65%]">
-              <div className="absolute left-0 -translate-x-1 top-0 w-0 h-0 border-r-8 border-r-message-bubble border-t-8 border-t-transparent" />
+          <div className="mt-2 flex justify-start">
+            <div className="bg-message-bubble text-wa-primary relative max-w-[65%] rounded-lg px-3 py-2">
+              <div className="border-r-message-bubble absolute top-0 left-0 h-0 w-0 -translate-x-1 border-t-8 border-r-8 border-t-transparent" />
               <div className="flex items-center gap-2">
                 <TypingDots />
               </div>
@@ -60,5 +60,5 @@ export function MessageArea({ chatId }: MessageAreaProps) {
         <div ref={messagesEndRef} />
       </div>
     </div>
-  )
+  );
 }

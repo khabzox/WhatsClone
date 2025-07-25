@@ -1,44 +1,56 @@
-"use client"
+"use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-import { ArrowLeft, Search, Phone, Video, MoreVertical, Users } from "lucide-react"
-import type { Contact } from "@/types/global"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, Search, Phone, Video, MoreVertical, Users } from "lucide-react";
+import type { Contact } from "@/types/global";
 
 interface ChatHeaderProps {
-  contact: Contact
-  onMobileMenuOpen: () => void
+  contact: Contact;
+  onMobileMenuOpen: () => void;
 }
 
 export function ChatHeader({ contact, onMobileMenuOpen }: ChatHeaderProps) {
   return (
-    <div className="flex items-center gap-3 p-4 bg-wa-panel border-b border-wa-border">
+    <div className="bg-wa-panel border-wa-border flex items-center gap-3 border-b p-4">
       <Button
         variant="ghost"
         size="icon"
-        className="md:hidden text-wa-muted hover:text-wa-primary hover:bg-wa-hover"
+        className="text-wa-muted hover:text-wa-primary hover:bg-wa-hover md:hidden"
         onClick={onMobileMenuOpen}
       >
-        <ArrowLeft className="w-5 h-5" />
+        <ArrowLeft className="h-5 w-5" />
       </Button>
 
-      <Avatar className="w-10 h-10">
+      <Avatar className="h-10 w-10">
         <AvatarImage src={contact.avatar || "/placeholder.svg"} />
         <AvatarFallback>
-          {contact.isGroup ? <Users className="w-5 h-5 text-wa-muted" /> : contact.name.slice(0, 2).toUpperCase()}
+          {contact.isGroup ? (
+            <Users className="text-wa-muted h-5 w-5" />
+          ) : (
+            contact.name.slice(0, 2).toUpperCase()
+          )}
         </AvatarFallback>
       </Avatar>
 
-      <div className="flex-1 min-w-0">
-        <h2 className="font-medium text-wa-primary truncate">{contact.name}</h2>
-        <p className="text-sm text-wa-secondary">
-          {contact.isOnline ? "online" : contact.lastSeen ? `last seen ${contact.lastSeen}` : "offline"}
+      <div className="min-w-0 flex-1">
+        <h2 className="text-wa-primary truncate font-medium">{contact.name}</h2>
+        <p className="text-wa-secondary text-sm">
+          {contact.isOnline
+            ? "online"
+            : contact.lastSeen
+              ? `last seen ${contact.lastSeen}`
+              : "offline"}
         </p>
       </div>
 
       <div className="flex items-center gap-2">
-        <Button variant="ghost" size="icon" className="text-wa-muted hover:text-wa-primary hover:bg-wa-hover">
-          <Search className="w-5 h-5" />
+        <Button
+          variant="ghost"
+          size="icon"
+          className="text-wa-muted hover:text-wa-primary hover:bg-wa-hover"
+        >
+          <Search className="h-5 w-5" />
         </Button>
         {/* <Button variant="ghost" size="icon" className="text-wa-muted hover:text-wa-primary hover:bg-wa-hover">
           <Phone className="w-5 h-5" />
@@ -46,10 +58,14 @@ export function ChatHeader({ contact, onMobileMenuOpen }: ChatHeaderProps) {
         <Button variant="ghost" size="icon" className="text-wa-muted hover:text-wa-primary hover:bg-wa-hover">
           <Video className="w-5 h-5" />
         </Button> */}
-        <Button variant="ghost" size="icon" className="text-wa-muted hover:text-wa-primary hover:bg-wa-hover">
-          <MoreVertical className="w-5 h-5" />
+        <Button
+          variant="ghost"
+          size="icon"
+          className="text-wa-muted hover:text-wa-primary hover:bg-wa-hover"
+        >
+          <MoreVertical className="h-5 w-5" />
         </Button>
       </div>
     </div>
-  )
+  );
 }

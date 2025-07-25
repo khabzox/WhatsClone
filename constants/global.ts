@@ -11,4 +11,4 @@ export const WHATSAPP_COLORS = {
   muted: "#8696a0",
   hover: "rgba(255, 255, 255, 0.05)",
   border: "#313d45",
-} as const
+} as const;

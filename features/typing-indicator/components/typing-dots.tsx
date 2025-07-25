@@ -2,7 +2,7 @@ export function TypingDots() {
   return (
     <div className="flex items-center gap-0.5">
       <div
-        className="w-1.5 h-1.5 bg-wa-green rounded-full animate-pulse"
+        className="bg-wa-green h-1.5 w-1.5 animate-pulse rounded-full"
         style={{
           animationDelay: "0ms",
           animationDuration: "1.4s",
@@ -10,7 +10,7 @@ export function TypingDots() {
         }}
       />
       <div
-        className="w-1.5 h-1.5 bg-wa-green rounded-full animate-pulse"
+        className="bg-wa-green h-1.5 w-1.5 animate-pulse rounded-full"
         style={{
           animationDelay: "200ms",
           animationDuration: "1.4s",
@@ -18,7 +18,7 @@ export function TypingDots() {
         }}
       />
       <div
-        className="w-1.5 h-1.5 bg-wa-green rounded-full animate-pulse"
+        className="bg-wa-green h-1.5 w-1.5 animate-pulse rounded-full"
         style={{
           animationDelay: "400ms",
           animationDuration: "1.4s",
@@ -26,5 +26,5 @@ export function TypingDots() {
         }}
       />
     </div>
-  )
+  );
 }

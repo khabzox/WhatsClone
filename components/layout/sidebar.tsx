@@ -1,31 +1,31 @@
-import { ChatListHeader } from "@/features/chat-list/components/chat-list-header"
+import { ChatListHeader } from "@/features/chat-list/components/chat-list-header";
 // import { SearchBar } from "@/features/chat-list/components/search-bar" // Will be use in future
-import { ChatList } from "@/features/chat-list/components/chat-list"
-import { ArchivedBadge } from "@/features/chat-list/components/archived-badge"
+import { ChatList } from "@/features/chat-list/components/chat-list";
+import { ArchivedBadge } from "@/features/chat-list/components/archived-badge";
 
 interface SidebarProps {
-  selectedChatId: string | null
-  onChatSelect: (chatId: string) => void
-  onMobileMenuClose: () => void
+  selectedChatId: string | null;
+  onChatSelect: (chatId: string) => void;
+  onMobileMenuClose: () => void;
 }
 
 export function Sidebar({ selectedChatId, onChatSelect, onMobileMenuClose }: SidebarProps) {
   return (
-    <div className="w-80 h-full bg-wa-sidebar flex flex-col border-r border-wa-border">
+    <div className="bg-wa-sidebar border-wa-border flex h-full w-80 flex-col border-r">
       <ChatListHeader />
       {/* <SearchBar /> */}
-      <div className="flex-1 overflow-hidden flex flex-col">
+      <div className="flex flex-1 flex-col overflow-hidden">
         {/* <ArchivedBadge count={4} /> */}
-        <div className="flex-1 overflow-y-auto scrollbar-thin">
+        <div className="scrollbar-thin flex-1 overflow-y-auto">
           <ChatList
             selectedChatId={selectedChatId}
-            onChatSelect={(chatId) => {
-              onChatSelect(chatId)
-              onMobileMenuClose()
+            onChatSelect={chatId => {
+              onChatSelect(chatId);
+              onMobileMenuClose();
             }}
           />
         </div>
       </div>
     </div>
-  )
+  );
 }

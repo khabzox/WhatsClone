@@ -1,4 +1,4 @@
-import type { Message } from "@/types/global"
+import type { Message } from "@/types/global";
 
 export const mockMessages: Record<string, Message[]> = {
   "1": [
@@ -37,7 +37,8 @@ export const mockMessages: Record<string, Message[]> = {
     },
     {
       id: "5",
-      content: "Nice! I've been meaning to learn more about Next.js. Any good resources you'd recommend?",
+      content:
+        "Nice! I've been meaning to learn more about Next.js. Any good resources you'd recommend?",
       timestamp: new Date("2024-01-25T10:20:00"),
       isOwnMessage: false,
       status: "read",
@@ -87,4 +88,4 @@ export const mockMessages: Record<string, Message[]> = {
       type: "text",
     },
   ],
-}
+};

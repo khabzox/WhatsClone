@@ -40,81 +40,66 @@ export function ChatItem({ chat, isSelected, onClick }: ChatItemProps) {
 
   return (
     <div
-      className={`
-        flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-200 relative
-        ${
-          isSelected
-            ? "bg-wa-panel border-r-4 border-wa-green"
-            : "hover:bg-wa-hover"
-        }
-      `}
+      className={`relative flex cursor-pointer items-center gap-3 px-4 py-3 transition-all duration-200 ${
+        isSelected ? "bg-wa-panel border-wa-green border-r-4" : "hover:bg-wa-hover"
+      } `}
       onClick={onClick}
     >
       <div className="relative flex-shrink-0">
-        <Avatar className="w-12 h-12">
+        <Avatar className="h-12 w-12">
           <AvatarImage
             src={chat.contact.avatar || "/placeholder.svg?height=48&width=48"}
             alt={chat.contact.name}
             className="object-cover"
-            onError={(e) => {
+            onError={e => {
               // Hide broken image, let fallback show
               e.currentTarget.style.display = "none";
             }}
           />
-          <AvatarFallback className="bg-wa-muted text-wa-sidebar font-medium text-sm">
+          <AvatarFallback className="bg-wa-muted text-wa-sidebar text-sm font-medium">
             {chat.contact.isGroup ? (
-              <Users className="w-6 h-6 text-wa-sidebar" />
+              <Users className="text-wa-sidebar h-6 w-6" />
             ) : (
               chat.contact.name.slice(0, 2).toUpperCase()
             )}
           </AvatarFallback>
         </Avatar>
-        {!chat.contact.isGroup && (
-          <OnlineStatus isOnline={chat.contact.isOnline} />
-        )}
+        {!chat.contact.isGroup && <OnlineStatus isOnline={chat.contact.isOnline} />}
       </div>
 
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center justify-between mb-1">
-          <div className="flex items-center gap-2 min-w-0 flex-1">
-            <h3 className="font-medium text-wa-primary truncate text-[15px]">
+      <div className="min-w-0 flex-1">
+        <div className="mb-1 flex items-center justify-between">
+          <div className="flex min-w-0 flex-1 items-center gap-2">
+            <h3 className="text-wa-primary truncate text-[15px] font-medium">
               {chat.contact.name}
             </h3>
-            {chat.isPinned && (
-              <Pin className="w-3 h-3 text-wa-muted flex-shrink-0 rotate-45" />
-            )}
+            {chat.isPinned && <Pin className="text-wa-muted h-3 w-3 flex-shrink-0 rotate-45" />}
           </div>
-          <div className="flex items-center gap-1 flex-shrink-0 ml-2">
-            <span className="text-xs text-wa-muted">
-              {formatTime(chat.lastMessage.timestamp)}
-            </span>
+          <div className="ml-2 flex flex-shrink-0 items-center gap-1">
+            <span className="text-wa-muted text-xs">{formatTime(chat.lastMessage.timestamp)}</span>
           </div>
         </div>
 
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1 min-w-0 flex-1">
+          <div className="flex min-w-0 flex-1 items-center gap-1">
             {chat.lastMessage.isOwnMessage && chat.lastMessage.status && (
               <MessageStatus status={chat.lastMessage.status} />
             )}
-            <div className="text-sm text-wa-secondary min-w-0 flex-1">
+            <div className="text-wa-secondary min-w-0 flex-1 text-sm">
               {chat.isTyping ? (
                 <div className="flex items-center gap-2">
                   <span className="text-wa-green text-sm">typing</span>
                   <TypingDots />
                 </div>
               ) : (
-                <div className="line-clamp-2 leading-5">
-                  {chat.lastMessage.content}
-                </div>
+                <div className="line-clamp-2 leading-5">{chat.lastMessage.content}</div>
               )}
             </div>
           </div>
 
-          <div className="flex items-center gap-1 flex-shrink-0 ml-2">
+          <div className="ml-2 flex flex-shrink-0 items-center gap-1">
             {chat.unreadCount > 0 && <UnreadBadge count={chat.unreadCount} />}
-            {chat.contact.isGroup && (
-              <Volume2 className="w-3 h-3 text-wa-muted" />
-            )}
+            {chat.contact.isGroup && <Volume2 className="text-wa-muted h-3 w-3" />}
           </div>
         </div>
       </div>

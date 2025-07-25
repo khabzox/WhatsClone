@@ -11,11 +11,10 @@ import {
 export function ChatListHeader() {
   const { user } = useUser();
 
-  const userName =
-    user?.fullName || user?.firstName || user?.username || "User";
+  const userName = user?.fullName || user?.firstName || user?.username || "User";
 
   return (
-    <div className="flex items-center justify-between p-4 bg-wa-sidebar border-b border-wa-border">
+    <div className="bg-wa-sidebar border-wa-border flex items-center justify-between border-b p-4">
       <div className="flex items-center gap-3">
         <UserButton
           appearance={{
@@ -30,10 +29,10 @@ export function ChatListHeader() {
 
         {/* Optional: Show user name on hover or always visible */}
         <div className="hidden md:block">
-          <p className="text-wa-primary font-medium text-sm truncate max-w-[200px] overflow-hidden">
+          <p className="text-wa-primary max-w-[200px] truncate overflow-hidden text-sm font-medium">
             {userName}
           </p>
-          <p className="text-wa-muted text-xs truncate max-w-[200px] overflow-hidden">
+          <p className="text-wa-muted max-w-[200px] truncate overflow-hidden text-xs">
             {user?.primaryEmailAddress?.emailAddress}
           </p>
         </div>
@@ -60,10 +59,10 @@ export function ChatListHeader() {
         <Button
           variant="ghost"
           size="icon"
-          className="w-10 h-10 text-wa-muted hover:text-wa-primary hover:bg-wa-hover rounded-full transition-all duration-200 cursor-pointer"
+          className="text-wa-muted hover:text-wa-primary hover:bg-wa-hover h-10 w-10 cursor-pointer rounded-full transition-all duration-200"
           title="Menu"
         >
-          <MoreVertical className="w-5 h-5" />
+          <MoreVertical className="h-5 w-5" />
         </Button>
       </div>
     </div>

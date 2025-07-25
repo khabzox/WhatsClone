@@ -1,23 +1,19 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Sidebar } from "./sidebar"
-import { ChatPanel } from "./chat-panel"
-import { MainContainer } from "./main-container"
+import { useState } from "react";
+import { Sidebar } from "./sidebar";
+import { ChatPanel } from "./chat-panel";
+import { MainContainer } from "./main-container";
 
 export function AppLayout() {
-  const [selectedChatId, setSelectedChatId] = useState<string | null>(null)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [selectedChatId, setSelectedChatId] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="flex h-screen bg-wa-background">
+    <div className="bg-wa-background flex h-screen">
       {/* Sidebar */}
       <div
-        className={`
-        ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}
-        md:translate-x-0 transition-transform duration-300 ease-in-out
-        fixed md:relative z-30 w-80 h-full
-      `}
+        className={` ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"} fixed z-30 h-full w-80 transition-transform duration-300 ease-in-out md:relative md:translate-x-0`}
       >
         <Sidebar
           selectedChatId={selectedChatId}
@@ -27,19 +23,22 @@ export function AppLayout() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex min-w-0 flex-1 flex-col">
         <MainContainer>
-          <ChatPanel selectedChatId={selectedChatId} onMobileMenuOpen={() => setIsMobileMenuOpen(true)} />
+          <ChatPanel
+            selectedChatId={selectedChatId}
+            onMobileMenuOpen={() => setIsMobileMenuOpen(true)}
+          />
         </MainContainer>
       </div>
 
       {/* Mobile Overlay */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
+          className="bg-opacity-50 fixed inset-0 z-20 bg-black md:hidden"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
     </div>
-  )
+  );
 }
