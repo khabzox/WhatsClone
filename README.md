@@ -1,6 +1,6 @@
-# 💬 WhatsClone | WhatsApp Web Clone
+# 💬 WhatsClone | Chat App Clone
 
-A modern WhatsApp Web clone built with Next.js and real-time messaging capabilities.
+A modern Chat App clone built with Next.js and real-time messaging capabilities.
 
 ## 🚀 Tech Stack
 
@@ -35,7 +35,7 @@ A modern WhatsApp Web clone built with Next.js and real-time messaging capabilit
 
 ## 🏗️ Implementation Roadmap
 
-- [ ] **Phase 1**: Basic chat UI with static data
+- [x] **Phase 1**: Basic chat UI with static data
 - [ ] **Phase 2**: Supabase database + Clerk authentication
 - [ ] **Phase 3**: Real-time messaging with Socket.io
 - [ ] **Phase 4**: Media uploads (Cloudinary + Dropzone)
