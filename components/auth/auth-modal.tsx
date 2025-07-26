@@ -61,7 +61,7 @@ export function AuthModal({ isOpen, mode, onModeChange }: AuthModalProps) {
           </div>
           {mode === "sign-in" ? (
             <div className="p-6">
-              <SignIn.Root>
+              <SignIn.Root routing="virtual">
                 {/* CAPTCHA container for bot protection */}
                 <div id="clerk-captcha"></div>
                 {/* Global error handling */}
@@ -258,7 +258,7 @@ export function AuthModal({ isOpen, mode, onModeChange }: AuthModalProps) {
                   Join {configProject.appName} to start messaging
                 </p>
               </div>
-              <SignUp.Root>
+              <SignUp.Root routing="virtual">
                 {/* CAPTCHA container for bot protection */}
                 <div id="clerk-captcha"></div>
                 {/* Global error handling */}
