@@ -17,17 +17,17 @@ export function MessageBubble({ message }: MessageBubbleProps) {
   return (
     <div className={`flex ${message.isOwnMessage ? "justify-end" : "justify-start"} mb-[2px]`}>
       <div
-        className={`relative max-w-[85%] px-[7px] py-[6px] my-1 ${
-          message.isOwnMessage 
-            ? "bg-wa-green-dark text-white rounded-[7.5px] rounded-br-[2px]" 
+        className={`relative my-1 max-w-[85%] px-[7px] py-[6px] ${
+          message.isOwnMessage
+            ? "bg-wa-green-dark rounded-[7.5px] rounded-br-[2px] text-white"
             : "bg-wa-panel text-wa-primary rounded-[7.5px] rounded-bl-[2px]"
         }`}
       >
-        <div className={`leading-[19px] break-words whitespace-pre-wrap text-[14.2px] ${
-        message.isOwnMessage
-        ? "pr-[67px]"
-        : "pr-[50px]"
-        }`}>
+        <div
+          className={`text-[14.2px] leading-[19px] break-words whitespace-pre-wrap ${
+            message.isOwnMessage ? "pr-[67px]" : "pr-[50px]"
+          }`}
+        >
           {message.content}
         </div>
 
@@ -37,9 +37,7 @@ export function MessageBubble({ message }: MessageBubbleProps) {
           }`}
         >
           <span className="select-none">{formatTime(message.timestamp)}</span>
-          {message.isOwnMessage && message.status && (
-            <MessageStatus status={message.status} />
-          )}
+          {message.isOwnMessage && message.status && <MessageStatus status={message.status} />}
         </div>
       </div>
     </div>
