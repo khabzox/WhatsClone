@@ -19,8 +19,8 @@ export function MessageBubble({ message }: MessageBubbleProps) {
       <div
         className={`relative max-w-[85%] px-[7px] py-[6px] my-1 ${
           message.isOwnMessage 
-            ? "bg-[#005c4b] text-white rounded-[7.5px] rounded-br-[2px]" 
-            : "bg-[#202c33] text-[#e9edef] rounded-[7.5px] rounded-bl-[2px]"
+            ? "bg-wa-green-dark text-white rounded-[7.5px] rounded-br-[2px]" 
+            : "bg-wa-panel text-wa-primary rounded-[7.5px] rounded-bl-[2px]"
         }`}
       >
         <div className={`leading-[19px] break-words whitespace-pre-wrap text-[14.2px] ${
@@ -33,7 +33,7 @@ export function MessageBubble({ message }: MessageBubbleProps) {
 
         <div
           className={`absolute right-[6px] bottom-[4px] flex items-center gap-[2px] text-[11px] leading-[11px] ${
-            message.isOwnMessage ? "text-[#8696a0]" : "text-[#8696a0]"
+            message.isOwnMessage ? "text-wa-secondary" : "text-wa-muted"
           }`}
         >
           <span className="select-none">{formatTime(message.timestamp)}</span>
