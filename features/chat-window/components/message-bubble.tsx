@@ -15,31 +15,30 @@ export function MessageBubble({ message }: MessageBubbleProps) {
   };
 
   return (
-    <div className={`flex py-2 ${message.isOwnMessage ? "justify-end" : "justify-start"} mb-1`}>
+    <div className={`flex ${message.isOwnMessage ? "justify-end" : "justify-start"} mb-[2px]`}>
       <div
-        className={`relative max-w-[65%] rounded-lg px-3 py-2 shadow-sm ${message.isOwnMessage ? "bg-message-bubble-own text-white" : "bg-message-bubble text-wa-primary"} `}
+        className={`relative max-w-[85%] px-[7px] py-[6px] my-1 ${
+          message.isOwnMessage 
+            ? "bg-[#005c4b] text-white rounded-[7.5px] rounded-br-[2px]" 
+            : "bg-[#202c33] text-[#e9edef] rounded-[7.5px] rounded-bl-[2px]"
+        }`}
       >
-        {/* Message tail */}
-        <div
-          className={`absolute top-0 h-0 w-0 ${
-            message.isOwnMessage
-              ? "border-l-message-bubble-own right-0 translate-x-1 border-t-8 border-l-8 border-t-transparent"
-              : "border-r-message-bubble left-0 -translate-x-1 border-t-8 border-r-8 border-t-transparent"
-          } `}
-        />
-
-        <div className="pr-12 leading-5 break-words whitespace-pre-wrap">{message.content}</div>
+        <div className={`leading-[19px] break-words whitespace-pre-wrap text-[14.2px] ${
+        message.isOwnMessage
+        ? "pr-[67px]"
+        : "pr-[50px]"
+        }`}>
+          {message.content}
+        </div>
 
         <div
-          className={`absolute right-3 bottom-2 mt-1 flex items-center justify-end gap-1 text-xs ${
-            message.isOwnMessage ? "text-white/70" : "text-wa-muted"
+          className={`absolute right-[6px] bottom-[4px] flex items-center gap-[2px] text-[11px] leading-[11px] ${
+            message.isOwnMessage ? "text-[#8696a0]" : "text-[#8696a0]"
           }`}
         >
           <span className="select-none">{formatTime(message.timestamp)}</span>
           {message.isOwnMessage && message.status && (
-            <div className="ml-1">
-              <MessageStatus status={message.status} />
-            </div>
+            <MessageStatus status={message.status} />
           )}
         </div>
       </div>

@@ -5,6 +5,7 @@ import { MessageBubble } from "./message-bubble";
 import { mockMessages } from "../lib/mock-messages";
 import { TypingDots } from "@/features/typing-indicator/components/typing-dots";
 import { mockChats } from "@/features/chat-list/lib/mock-data";
+import { ChatWindowBg1 } from "@/lib/icons";
 
 interface MessageAreaProps {
   chatId: string;
@@ -22,20 +23,15 @@ export function MessageArea({ chatId }: MessageAreaProps) {
   return (
     <div
       className="scrollbar-thin relative flex-1 space-y-1 overflow-y-auto p-4"
-      style={{
-        backgroundImage: `
-          radial-gradient(circle at 25% 25%, rgba(0, 168, 132, 0.02) 0%, transparent 50%),
-          radial-gradient(circle at 75% 75%, rgba(0, 168, 132, 0.02) 0%, transparent 50%)
-        `,
-        backgroundColor: "#0b141a",
-      }}
+      style={{ backgroundColor: "#111b21" }}
     >
-      {/* Chat background pattern */}
+      {/* Background pattern with very subtle visibility */}
       <div
-        className="absolute inset-0 opacity-[0.02]"
-        // style={{
-        //   backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fillRule='evenodd'%3E%3Cg fill='%23ffffff' fillOpacity='1'%3E%3Cpath d='M30 30c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm0 0c0 11.046 8.954 20 20 20s20-8.954 20-20-8.954-20-20-20-20 8.954-20 20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        // }}
+        className="absolute inset-0 z-0 bg-auto bg-center bg-repeat opacity-20 mix-blend-screen"
+        style={{
+          backgroundImage: `url(${typeof ChatWindowBg1 === "string" ? ChatWindowBg1 : ChatWindowBg1.src})`,
+          filter: "brightness(1.2) contrast(1.2)",
+        }}
       />
 
       <div className="relative z-10">
