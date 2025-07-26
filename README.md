@@ -21,7 +21,6 @@ A modern Chat App clone built with Next.js and real-time messaging capabilities.
 ### Backend & Database
 
 - **Supabase** - PostgreSQL database with real-time features
-- **Socket.io** - Real-time messaging
 - **Clerk** - Authentication
 
 ### Media & Utils

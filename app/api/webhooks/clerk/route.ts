@@ -1,3 +1,4 @@
+// app/api/webhooks/clerk/route.ts
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { Webhook } from "svix";
@@ -12,7 +13,7 @@ const supabase = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE
   },
 });
 
-type ClerkWebhookEvent = {
+interface ClerkWebhookEvent {
   data: {
     id: string;
     email_addresses: Array<{
@@ -24,6 +25,7 @@ type ClerkWebhookEvent = {
     first_name?: string;
     last_name?: string;
     image_url?: string;
+    username?: string;
     created_at: number;
     updated_at: number;
     last_sign_in_at?: number;
@@ -97,6 +99,16 @@ export async function POST(req: NextRequest) {
   }
 }
 
+function generateUsernameFromEmail(email: string, id: string): string {
+  // Remove email domain and special characters
+  let username = email.split('@')[0].toLowerCase();
+  // Replace special characters with underscores
+  username = username.replace(/[^a-z0-9]/g, '_');
+  // Add part of user ID to ensure uniqueness
+  username += '_' + id.slice(-6);
+  return username;
+}
+
 async function handleUserCreated(data: ClerkWebhookEvent["data"]) {
   const primaryEmail =
     data.email_addresses.find(email => email.verification?.status === "verified") ||
@@ -105,6 +117,14 @@ async function handleUserCreated(data: ClerkWebhookEvent["data"]) {
   if (!primaryEmail) {
     throw new Error("No email address found for user");
   }
+
+  // Generate a unique username
+  const username = data.username || generateUsernameFromEmail(primaryEmail.email_address, data.id);
+  
+  // Create display name from first/last name or fallback to email
+  const displayName = data.first_name && data.last_name 
+    ? `${data.first_name} ${data.last_name}`
+    : data.first_name || data.last_name || primaryEmail.email_address;
 
   const userData = {
     id: data.id,
@@ -116,6 +136,13 @@ async function handleUserCreated(data: ClerkWebhookEvent["data"]) {
     updated_at: new Date(data.updated_at).toISOString(),
     last_sign_in_at: data.last_sign_in_at ? new Date(data.last_sign_in_at).toISOString() : null,
     email_verified: primaryEmail.verification?.status === "verified",
+    // New chat-specific fields
+    username: username,
+    display_name: displayName,
+    bio: null,
+    phone: null,
+    is_online: false,
+    last_seen: new Date().toISOString(),
   };
 
   const { error } = await supabase.from("users").insert(userData);
@@ -137,6 +164,11 @@ async function handleUserUpdated(data: ClerkWebhookEvent["data"]) {
     throw new Error("No email address found for user");
   }
 
+  // Create display name from first/last name or fallback to email
+  const displayName = data.first_name && data.last_name 
+    ? `${data.first_name} ${data.last_name}`
+    : data.first_name || data.last_name || primaryEmail.email_address;
+
   const userData = {
     email: primaryEmail.email_address,
     first_name: data.first_name || null,
@@ -145,6 +177,9 @@ async function handleUserUpdated(data: ClerkWebhookEvent["data"]) {
     updated_at: new Date(data.updated_at).toISOString(),
     last_sign_in_at: data.last_sign_in_at ? new Date(data.last_sign_in_at).toISOString() : null,
     email_verified: primaryEmail.verification?.status === "verified",
+    display_name: displayName,
+    // Update username if provided by Clerk
+    ...(data.username && { username: data.username }),
   };
 
   const { error } = await supabase.from("users").update(userData).eq("id", data.id);
